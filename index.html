@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Student Fintech Solution</title>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Student Fintech</h1>
+        <p>Your all-in-one financial solution for student life.</p>
+    </header>
+
+    <section class="features">
+        <a href="./pages/budget.html" class="feature-card">
+            <h2>Budgeting</h2>
+            <p>Track your expenses and manage your budget effortlessly.</p>
+        </a>
+        <a href="./pages/discount.html" class="feature-card">
+            <h2>Student Discounts</h2>
+            <p>Access exclusive deals and save money on everyday purchases.</p>
+        </a>
+        <a href="./pages/loan.html" class="feature-card">
+            <h2>Loan Management</h2>
+            <p>Stay on top of your student loans with our easy-to-use tools.</p>
+        </a>
+    </section>
+
+    <section class="savings-calculator">
+        <h2>Savings Goal Calculator</h2>
+        <div class="save-con">
+            <label for="goal">Savings Goal ($):</label>
+            <input type="number" id="goal" placeholder="Enter your goal">
+        </div>
+        <div class="duration">
+            <label for="months">Timeline (months):</label>
+            <input type="number" id="months" placeholder="Enter timeline">
+        </div>
+        <button onclick="calculateSavings()">Calculate</button>
+        <p id="result"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Student Fintech. All rights reserved.</p>
+    </footer>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>

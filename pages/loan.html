@@ -1,0 +1,180 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management - Student Fintech</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #6200ee;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .loan-form {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .loan-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .loan-form button {
+            background-color: #03dac6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .loans-list {
+            margin-top: 20px;
+        }
+
+        .loans-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .loans-list li {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .loan-details {
+            margin-top: 10px;
+        }
+
+        a {
+            background-color: #03dac6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Loan Management</h1>
+        <p>Track and manage your student loans.</p>
+        <a href="../index.html">Home</a>
+    </header>
+
+    <div class="container">
+        <div class="loan-form">
+            <h2>Add a Loan</h2>
+            <input type="text" id="loan-name" placeholder="Loan Name">
+            <input type="number" id="loan-amount" placeholder="Loan Amount ($)">
+            <input type="number" id="interest-rate" placeholder="Interest Rate (%)">
+            <input type="number" id="loan-term" placeholder="Loan Term (years)">
+            <button onclick="addLoan()">Add Loan</button>
+        </div>
+
+        <div class="loans-list">
+            <h2>Your Loans</h2>
+            <ul id="loans"></ul>
+        </div>
+    </div>
+
+    <script>
+        let loans = [];
+
+        function addLoan() {
+            const name = document.getElementById('loan-name').value;
+            const amount = parseFloat(document.getElementById('loan-amount').value);
+            const interestRate = parseFloat(document.getElementById('interest-rate').value);
+            const term = parseFloat(document.getElementById('loan-term').value);
+
+            if (name && amount && interestRate && term) {
+                const loan = {
+                    name,
+                    amount,
+                    interestRate,
+                    term,
+                    monthlyPayment: calculateMonthlyPayment(amount, interestRate, term),
+                    totalInterest: calculateTotalInterest(amount, interestRate, term)
+                };
+                loans.push(loan);
+                updateLoansList();
+                document.getElementById('loan-name').value = '';
+                document.getElementById('loan-amount').value = '';
+                document.getElementById('interest-rate').value = '';
+                document.getElementById('loan-term').value = '';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function calculateMonthlyPayment(amount, interestRate, term) {
+            const monthlyInterestRate = (interestRate / 100) / 12;
+            const numberOfPayments = term * 12;
+            const monthlyPayment =
+                (amount * monthlyInterestRate) /
+                (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            return monthlyPayment.toFixed(2);
+        }
+
+        function calculateTotalInterest(amount, interestRate, term) {
+            const monthlyPayment = calculateMonthlyPayment(amount, interestRate, term);
+            const totalPayment = monthlyPayment * (term * 12);
+            return (totalPayment - amount).toFixed(2);
+        }
+
+        function updateLoansList() {
+            const list = document.getElementById('loans');
+            list.innerHTML = '';
+            loans.forEach((loan, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+          <strong>${loan.name}</strong>
+          <div class="loan-details">
+            <p>Amount: $${loan.amount.toFixed(2)}</p>
+            <p>Interest Rate: ${loan.interestRate}%</p>
+            <p>Term: ${loan.term} years</p>
+            <p>Monthly Payment: $${loan.monthlyPayment}</p>
+            <p>Total Interest: $${loan.totalInterest}</p>
+            <button onclick="deleteLoan(${index})">Delete</button>
+          </div>
+        `;
+                list.appendChild(li);
+            });
+        }
+
+        function deleteLoan(index) {
+            loans.splice(index, 1);
+            updateLoansList();
+        }
+    </script>
+</body>
+
+</html>
