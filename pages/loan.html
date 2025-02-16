@@ -41,7 +41,7 @@
             border-radius: 5px;
         }
 
-        .loan-form button {
+        button {
             background-color: #03dac6;
             color: white;
             padding: 10px 20px;
@@ -94,7 +94,7 @@
         <div class="loan-form">
             <h2>Add a Loan</h2>
             <input type="text" id="loan-name" placeholder="Loan Name">
-            <input type="number" id="loan-amount" placeholder="Loan Amount ($)">
+            <input type="number" id="loan-amount" placeholder="Loan Amount (₦)">
             <input type="number" id="interest-rate" placeholder="Interest Rate (%)">
             <input type="number" id="loan-term" placeholder="Loan Term (years)">
             <button onclick="addLoan()">Add Loan</button>
@@ -158,11 +158,11 @@
                 li.innerHTML = `
           <strong>${loan.name}</strong>
           <div class="loan-details">
-            <p>Amount: $${loan.amount.toFixed(2)}</p>
+            <p>Amount: ₦${loan.amount.toFixed(2)}</p>
             <p>Interest Rate: ${loan.interestRate}%</p>
             <p>Term: ${loan.term} years</p>
-            <p>Monthly Payment: $${loan.monthlyPayment}</p>
-            <p>Total Interest: $${loan.totalInterest}</p>
+            <p>Monthly Payment: ₦${loan.monthlyPayment}</p>
+            <p>Total Interest: ₦${loan.totalInterest}</p>
             <button onclick="deleteLoan(${index})">Delete</button>
           </div>
         `;

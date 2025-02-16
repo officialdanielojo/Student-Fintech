@@ -42,7 +42,7 @@
             border-radius: 5px;
         }
 
-        .budget-form button {
+        button {
             background-color: #03dac6;
             color: white;
             padding: 10px 20px;
@@ -91,7 +91,7 @@
         <div class="budget-form">
             <h2>Add an Expense</h2>
             <input type="text" id="expense-name" placeholder="Expense Name">
-            <input type="number" id="expense-amount" placeholder="Amount ($)">
+            <input type="number" id="expense-amount" placeholder="Amount (₦)">
             <button onclick="addExpense()">Add Expense</button>
         </div>
 
@@ -123,7 +123,7 @@
             list.innerHTML = '';
             expenses.forEach((expense, index) => {
                 const li = document.createElement('li');
-                li.innerHTML = `${expense.name}: $${expense.amount.toFixed(2)} <button onclick="deleteExpense(${index})">Delete</button>`;
+                li.innerHTML = `${expense.name}: ₦${expense.amount.toFixed(2)} <button onclick="deleteExpense(${index})">Delete</button>`;
                 list.appendChild(li);
             });
         }
