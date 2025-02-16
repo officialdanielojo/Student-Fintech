@@ -13,8 +13,7 @@
      text-align: center;
  }
 
- .cta-button,
- .savings-calculator button {
+ button {
      background-color: #03dac6;
      color: white;
      padding: 10px 20px;
